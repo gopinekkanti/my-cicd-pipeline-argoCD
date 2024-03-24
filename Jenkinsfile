@@ -8,7 +8,7 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
-        //git branch: 'main', url: 'https://github.com/gopinekkanti/my-cicd-pipeline-argoCD.git'
+         git branch: 'main', url: 'https://github.com/gopinekkanti/my-cicd-pipeline-argoCD.git'
       }
     }
     stage('Build and Test') {
