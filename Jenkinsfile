@@ -9,7 +9,7 @@ pipeline {
     stage('Build and Test') {
       steps {
         // build the project and create a JAR file
-        sh 'cd my-cicd-pipeline-argoCD/spring-boot-app && mvn clean package'
+        sh 'cd my-pipeline/my-cicd-pipeline-argoCD/spring-boot-app && mvn clean package'
       }
     }
     stage('Build and Push Docker Image') {
