@@ -9,18 +9,18 @@ pipeline {
     stage('Build and Test') {
       steps {
         // build the project and create a JAR file
-        sh 'my-cicd-pipeline-argoCD/spring-boot-app && mvn clean package'
+        sh 'cd spring-boot-app && mvn clean package'
       }
     }
     stage('Build and Push Docker Image') {
       environment {
         DOCKER_IMAGE = "nekkantigopi/mydockerimages:${BUILD_NUMBER}"
-        // DOCKERFILE_LOCATION = "my-cicd-pipeline-argoCD/spring-boot-app/Dockerfile"
+        // DOCKERFILE_LOCATION = "spring-boot-app/Dockerfile"
         REGISTRY_CREDENTIALS = credentials('docker-cred')
       }
       steps {
         script {
-            sh 'cd my-cicd-pipeline-argoCD/spring-boot-app && docker build -t ${DOCKER_IMAGE} .'
+            sh 'cd spring-boot-app && docker build -t ${DOCKER_IMAGE} .'
             def dockerImage = docker.image("${DOCKER_IMAGE}")
             docker.withRegistry('https://index.docker.io/v1/', "docker-cred") {
                 dockerImage.push()
